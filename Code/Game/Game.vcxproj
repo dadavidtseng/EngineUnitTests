@@ -186,25 +186,12 @@
   <ItemGroup>
     <ClInclude Include="EngineBuildPreferences.hpp" />
     <ClInclude Include="GameCommon.hpp" />
-    <ClInclude Include="UnitTests_Custom.hpp" />
-    <ClInclude Include="UnitTests_MP1A1.hpp" />
-    <ClInclude Include="UnitTests_MP1A2.hpp" />
-    <ClInclude Include="UnitTests_MP1A3.hpp" />
-    <ClInclude Include="UnitTests_MP1A4.hpp" />
-    <ClInclude Include="UnitTests_MP1A7.hpp" />
-    <ClInclude Include="UnitTests_MP2A1.hpp" />
-    <ClInclude Include="UnitTests_MP2A2.hpp" />
+    <ClInclude Include="UnitTests_AABB2.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameCommon.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="UnitTests_Custom.cpp" />
-    <ClCompile Include="UnitTests_MP1A1.cpp" />
-    <ClCompile Include="UnitTests_MP1A2.cpp" />
-    <ClCompile Include="UnitTests_MP1A3.cpp" />
-    <ClCompile Include="UnitTests_MP1A4.cpp" />
-    <ClCompile Include="UnitTests_MP1A7.cpp" />
-    <ClCompile Include="UnitTests_MP2A1.cpp" />
-    <ClCompile Include="UnitTests_MP2A2.cpp" />
+    <ClCompile Include="UnitTests_AABB2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Engine\Code\Engine\Engine.vcxproj">

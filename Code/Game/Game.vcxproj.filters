@@ -10,64 +10,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UnitTests_MP1A1.hpp">
-      <Filter>Unit Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitTests_Custom.hpp">
-      <Filter>Unit Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitTests_MP1A2.hpp">
-      <Filter>Unit Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitTests_MP1A3.hpp">
-      <Filter>Unit Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitTests_MP1A4.hpp">
-      <Filter>Unit Tests</Filter>
-    </ClInclude>
     <ClInclude Include="EngineBuildPreferences.hpp">
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="GameCommon.hpp">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="UnitTests_MP1A7.hpp">
-      <Filter>Unit Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitTests_MP2A1.hpp">
-      <Filter>Unit Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitTests_MP2A2.hpp">
+    <ClInclude Include="UnitTests_AABB2.hpp">
       <Filter>Unit Tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UnitTests_MP1A1.cpp">
-      <Filter>Unit Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitTests_Custom.cpp">
-      <Filter>Unit Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitTests_MP1A2.cpp">
-      <Filter>Unit Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitTests_MP1A3.cpp">
-      <Filter>Unit Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitTests_MP1A4.cpp">
-      <Filter>Unit Tests</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="UnitTests_MP1A7.cpp">
+    <ClCompile Include="UnitTests_AABB2.cpp">
       <Filter>Unit Tests</Filter>
     </ClCompile>
-    <ClCompile Include="UnitTests_MP2A1.cpp">
-      <Filter>Unit Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitTests_MP2A2.cpp">
-      <Filter>Unit Tests</Filter>
+    <ClCompile Include="GameCommon.cpp">
+      <Filter>Framework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
