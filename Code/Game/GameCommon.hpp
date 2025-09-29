@@ -20,3 +20,19 @@ typedef int (TestSetFunctionType)(); // Function signature type for all test fun
 //
 void RunTestSet(bool isGraded, TestSetFunctionType testSetFunction, char const* testSetName);
 void VerifyTestResult(bool isCorrect, char const* testName);
+
+//-----------------------------------------------------------------------------------------------
+// Performance measurement utilities for unit tests
+//
+#include <chrono>
+
+struct PerformanceTimer
+{
+    std::chrono::high_resolution_clock::time_point start;
+    std::chrono::high_resolution_clock::time_point end;
+    
+    void Start();
+    void Stop();
+    double GetElapsedMilliseconds() const;
+    double GetElapsedMicroseconds() const;
+};
