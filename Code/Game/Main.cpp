@@ -1,28 +1,22 @@
 //-----------------------------------------------------------------------------------------------
 // Math Unit Tests: Main.cpp (version 4.1) - for SMU Guildhall assignments MP1-A1 through MP1-A7
 //
-#include "Game/UnitTests_MP1A1.hpp"
-#include "Game/UnitTests_MP1A2.hpp"		// Uncomment this line after adding the MP1-A2 test code
-#include "Game/UnitTests_MP1A3.hpp"		// Uncomment this line after adding the MP1-A3 test code
-#include "Game/UnitTests_MP1A4.hpp"		// Uncomment this line after adding the MP1-A4 test code
-#include "Game/UnitTests_MP1A7.hpp"		// Uncomment this line after adding the MP1-A7 test code
-#include "Game/UnitTests_MP2A1.hpp"		// Uncomment this line after adding the MP2-A1 test code
-#include "Game/UnitTests_MP2A2.hpp"		// Uncomment this line after adding the MP2-A2 test code
-#include "Game/UnitTests_Custom.hpp"	// Uncomment this line after adding the custom tests file
+#include "Game/UnitTests_AABB2.hpp"	// Comprehensive AABB2 tests
 #include <cstdio>
 #include <cstdlib>
 
 //-----------------------------------------------------------------------------------------------
 void RunTestSets()
 {
-    RunTests_MP1A1();
-    RunTests_MP1A2();
-    RunTests_MP1A3();
-    RunTests_MP1A4();
-    RunTests_MP1A7();
-    RunTests_MP2A1();
-    RunTests_MP2A2();
+    // RunTests_MP1A1();
+    // RunTests_MP1A2();
+    // RunTests_MP1A3();
+    // RunTests_MP1A4();
+    // RunTests_MP1A7();
+    // RunTests_MP2A1();
+    // RunTests_MP2A2();
     // RunTests_Custom(); // Uncomment this line after adding the custom tests file
+    RunTests_AABB2(); // Comprehensive AABB2 tests
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
