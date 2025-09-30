@@ -1,9 +1,11 @@
-//-----------------------------------------------------------------------------------------------
-// UnitTests_AABB2.cpp - Comprehensive unit tests for all AABB2 functions
-//
+//----------------------------------------------------------------------------------------------------
+// UnitTests_AABB2.cpp
+//----------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------
 #include "Game/UnitTests_AABB2.hpp"
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include "Game/PerformanceTimer.hpp"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -13,102 +15,87 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 //-----------------------------------------------------------------------------------------------
-// Forward declarations for all test sets
-//
-int TestSet_AABB2_Constructors();
-int TestSet_AABB2_StaticConstants();
-int TestSet_AABB2_AccessorMethods();
-int TestSet_AABB2_MutatorMethods();
-int TestSet_AABB2_Operators();
-int TestSet_AABB2_UnimplementedMethods();
-int TestSet_AABB2_Performance_Comprehensive();
-
-//-----------------------------------------------------------------------------------------------
-// Helper functions for testing
-//
-bool IsMostlyEqual(float a, float b, float epsilon = 0.001f);
-bool IsMostlyEqual(const Vector2Class& vec2, float x, float y);
-bool IsMostlyEqual(const Vector2Class& vec2a, const Vector2Class& vec2b);
-bool IsMostlyEqual(const AABB2Class& box1, const AABB2Class& box2);
-bool IsMostlyEqual(const AABB2Class& box, float minX, float minY, float maxX, float maxY);
-
-// Helper implementations
-bool IsMostlyEqual(float a, float b, float epsilon)
-{
-    return (a >= (b - epsilon)) && (a <= (b + epsilon));
-}
-
-bool IsMostlyEqual(const Vector2Class& vec2, float x, float y)
-{
-    return IsMostlyEqual(vec2.x, x) && IsMostlyEqual(vec2.y, y);
-}
-
-bool IsMostlyEqual(const Vector2Class& vec2a, const Vector2Class& vec2b)
-{
-    return IsMostlyEqual(vec2a.x, vec2b.x) && IsMostlyEqual(vec2a.y, vec2b.y);
-}
-
-bool IsMostlyEqual(const AABB2Class& box1, const AABB2Class& box2)
-{
-    return IsMostlyEqual(box1.AABB2_Mins, box2.AABB2_Mins) &&
-        IsMostlyEqual(box1.AABB2_Maxs, box2.AABB2_Maxs);
-}
-
-bool IsMostlyEqual(const AABB2Class& box, float minX, float minY, float maxX, float maxY)
-{
-    return IsMostlyEqual(box.AABB2_Mins, minX, minY) &&
-        IsMostlyEqual(box.AABB2_Maxs, maxX, maxY);
-}
-
-//-----------------------------------------------------------------------------------------------
 int TestSet_AABB2_Constructors()
 {
 #if defined(ENABLE_TestSet_AABB2_Constructors)
 
-    printf("\n=== Testing AABB2 Constructors ===\n");
+    printf("####################################################################################################\n");
+    printf("(TestSet_AABB2_Constructors)(start)\n");
+    printf("####################################################################################################\n");
+
+    PerformanceTimer timer;
 
     // Test default constructor
-    AABB2Class box1;
-    VerifyTestResult(IsMostlyEqual(box1, 0.0f, 0.0f, 0.0f, 0.0f), "AABB2 default constructor should initialize to (0,0,0,0)");
+    timer.Start();
+    AABB2Class const box1;
+    timer.Stop();
+    printf("    Default constructor: %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(box1, 0.0f, 0.0f, 0.0f, 5.f), "AABB2 default constructor should initialize to (0,0,0,0)");
 
     // Test constructor from 4 ints
-    AABB2Class box2(1, 2, 5, 8);
+    timer.Start();
+    AABB2Class const box2(1, 2, 5, 8);
+    timer.Stop();
+    printf("    Constructor from 4 ints: %.6f us\n", timer.GetElapsedMicroseconds());
     VerifyTestResult(IsMostlyEqual(box2, 1.0f, 2.0f, 5.0f, 8.0f), "AABB2 constructor from 4 ints failed");
 
     // Test constructor from 4 floats
-    AABB2Class box3(1.5f, 2.5f, 5.5f, 8.5f);
+    timer.Start();
+    AABB2Class const box3(1.5f, 2.5f, 5.5f, 8.5f);
+    timer.Stop();
+    printf("    Constructor from 4 floats: %.6f us\n", timer.GetElapsedMicroseconds());
     VerifyTestResult(IsMostlyEqual(box3, 1.5f, 2.5f, 5.5f, 8.5f), "AABB2 constructor from 4 floats failed");
 
     // Test constructor from IntVec2s
-    IntVec2Class mins_iv2(3, 4);
-    IntVec2Class maxs_iv2(7, 9);
-    AABB2Class   box4(mins_iv2, maxs_iv2);
+    IntVec2Class const mins_IntVec2(3, 4);
+    IntVec2Class const maxs_IntVec2(7, 9);
+    timer.Start();
+    AABB2Class const box4(mins_IntVec2, maxs_IntVec2);
+    timer.Stop();
+    printf("    Constructor from IntVec2s: %.6f us\n", timer.GetElapsedMicroseconds());
     VerifyTestResult(IsMostlyEqual(box4, 3.0f, 4.0f, 7.0f, 9.0f), "AABB2 constructor from IntVec2s failed");
 
     // Test constructor from Vec2s
-    Vector2Class mins_v2(2.3f, 4.5f);
-    Vector2Class maxs_v2(6.7f, 8.9f);
-    AABB2Class   box5(mins_v2, maxs_v2);
+    Vector2Class const mins_Vec2(2.3f, 4.5f);
+    Vector2Class const maxs_Vec2(6.7f, 8.9f);
+    timer.Start();
+    AABB2Class const box5(mins_Vec2, maxs_Vec2);
+    timer.Stop();
+    printf("    Constructor from Vec2s: %.6f us\n", timer.GetElapsedMicroseconds());
     VerifyTestResult(IsMostlyEqual(box5, 2.3f, 4.5f, 6.7f, 8.9f), "AABB2 constructor from Vec2s failed");
 
     // Test copy constructor
-    AABB2Class box6(box5);
+    timer.Start();
+    AABB2Class const box6(box5);
+    timer.Stop();
+    printf("    Copy constructor: %.6f us\n", timer.GetElapsedMicroseconds());
     VerifyTestResult(IsMostlyEqual(box6, box5), "AABB2 copy constructor failed");
 
     // Test assignment operator
-    AABB2Class box7;
-    box7 = box3;
+    timer.Start();
+    AABB2Class const box7 = box3;
+    timer.Stop();
+    printf("    Assignment operator: %.6f us\n", timer.GetElapsedMicroseconds());
     VerifyTestResult(IsMostlyEqual(box7, box3), "AABB2 assignment operator failed");
 
     // Test const object construction and copy
+    timer.Start();
     const AABB2Class box8(box2);
+    timer.Stop();
+    printf("    Const copy constructor (1st): %.6f us\n", timer.GetElapsedMicroseconds());
+
+    timer.Start();
     const AABB2Class box9(box8);
+    timer.Stop();
+    printf("    Const copy constructor (2nd): %.6f us\n", timer.GetElapsedMicroseconds());
     VerifyTestResult(IsMostlyEqual(box9, box2), "AABB2 const copy constructor failed");
 
     // Test size verification
     VerifyTestResult(sizeof(AABB2Class) == 16, "sizeof(AABB2) should be 16 bytes (2 Vec2s)");
 
-    printf("  Constructors testing completed.\n");
+    printf("####################################################################################################\n");
+    printf("(TestSet_AABB2_Constructors)(end)\n");
+    printf("####################################################################################################\n");
 
 #endif
     return 9; // Number of tests expected
@@ -119,17 +106,31 @@ int TestSet_AABB2_StaticConstants()
 {
 #if defined(ENABLE_TestSet_AABB2_StaticConstants)
 
-    printf("\n=== Testing AABB2 Static Constants ===\n");
+    printf("####################################################################################################\n");
+    printf("(TestSet_AABB2_StaticConstants)(start)\n");
+    printf("####################################################################################################\n");
+
+    PerformanceTimer timer;
 
     // Test ZERO_TO_ONE constant
-    VerifyTestResult(IsMostlyEqual(AABB2Class::ZERO_TO_ONE, 0.0f, 0.0f, 1.0f, 1.0f),
+    timer.Start();
+    AABB2Class zeroToOne = AABB2Class::ZERO_TO_ONE;
+    timer.Stop();
+    printf("    ZERO_TO_ONE access: %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(zeroToOne, 0.0f, 0.0f, 1.0f, 1.0f),
                      "AABB2::ZERO_TO_ONE should be (0,0,1,1)");
 
     // Test NEG_HALF_TO_HALF constant
-    VerifyTestResult(IsMostlyEqual(AABB2Class::NEG_HALF_TO_HALF, -0.5f, -0.5f, 0.5f, 0.5f),
+    timer.Start();
+    AABB2Class negHalfToHalf = AABB2Class::NEG_HALF_TO_HALF;
+    timer.Stop();
+    printf("    NEG_HALF_TO_HALF access: %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(negHalfToHalf, -0.5f, -0.5f, 0.5f, 0.5f),
                      "AABB2::NEG_HALF_TO_HALF should be (-0.5,-0.5,0.5,0.5)");
 
-    printf("  Static constants testing completed.\n");
+    printf("####################################################################################################\n");
+    printf("(TestSet_AABB2_StaticConstants)(end)\n");
+    printf("####################################################################################################\n");
 
 #endif
     return 2; // Number of tests expected
@@ -142,79 +143,185 @@ int TestSet_AABB2_AccessorMethods()
 
     printf("\n=== Testing AABB2 Accessor Methods ===\n");
 
+    PerformanceTimer timer;
     AABB2Class       box(10.0f, 20.0f, 50.0f, 80.0f);
     const AABB2Class constBox(5.0f, 15.0f, 25.0f, 35.0f);
 
     // Test IsPointInside
-    VerifyTestResult(box.AABB2_IsPointInside(Vector2Class(30.0f, 50.0f)),
-                     "IsPointInside should return true for point inside box");
-    VerifyTestResult(!box.AABB2_IsPointInside(Vector2Class(60.0f, 50.0f)),
-                     "IsPointInside should return false for point outside box");
-    VerifyTestResult(box.AABB2_IsPointInside(Vector2Class(10.0f, 20.0f)),
-                     "IsPointInside should return true for point on min corner (inclusive)");
-    VerifyTestResult(box.AABB2_IsPointInside(Vector2Class(50.0f, 80.0f)),
-                     "IsPointInside should return true for point on max corner (inclusive)");
-    VerifyTestResult(constBox.AABB2_IsPointInside(Vector2Class(15.0f, 25.0f)),
-                     "IsPointInside should work on const AABB2 objects");
+    timer.Start();
+    bool result1 = box.AABB2_IsPointInside(Vector2Class(30.0f, 50.0f));
+    timer.Stop();
+    printf("    IsPointInside (inside): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(result1, "IsPointInside should return true for point inside box");
+
+    timer.Start();
+    bool result2 = box.AABB2_IsPointInside(Vector2Class(60.0f, 50.0f));
+    timer.Stop();
+    printf("    IsPointInside (outside): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(!result2, "IsPointInside should return false for point outside box");
+
+    timer.Start();
+    bool result3 = box.AABB2_IsPointInside(Vector2Class(10.0f, 20.0f));
+    timer.Stop();
+    printf("    IsPointInside (min corner): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(result3, "IsPointInside should return true for point on min corner (inclusive)");
+
+    timer.Start();
+    bool result4 = box.AABB2_IsPointInside(Vector2Class(50.0f, 80.0f));
+    timer.Stop();
+    printf("    IsPointInside (max corner): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(result4, "IsPointInside should return true for point on max corner (inclusive)");
+
+    timer.Start();
+    bool result5 = constBox.AABB2_IsPointInside(Vector2Class(15.0f, 25.0f));
+    timer.Stop();
+    printf("    IsPointInside (const object): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(result5, "IsPointInside should work on const AABB2 objects");
 
     // Test GetCenter
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetCenter(), 30.0f, 50.0f),
-                     "GetCenter should return center point of box");
-    VerifyTestResult(IsMostlyEqual(constBox.AABB2_GetCenter(), 15.0f, 25.0f),
-                     "GetCenter should work on const AABB2 objects");
+    timer.Start();
+    Vector2Class center1 = box.AABB2_GetCenter();
+    timer.Stop();
+    printf("    GetCenter: %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(center1, 30.0f, 50.0f), "GetCenter should return center point of box");
+
+    timer.Start();
+    Vector2Class center2 = constBox.AABB2_GetCenter();
+    timer.Stop();
+    printf("    GetCenter (const): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(center2, 15.0f, 25.0f), "GetCenter should work on const AABB2 objects");
 
     // Test GetDimensions
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetDimensions(), 40.0f, 60.0f),
-                     "GetDimensions should return width and height");
-    VerifyTestResult(IsMostlyEqual(constBox.AABB2_GetDimensions(), 20.0f, 20.0f),
-                     "GetDimensions should work on const AABB2 objects");
+    timer.Start();
+    Vector2Class dims1 = box.AABB2_GetDimensions();
+    timer.Stop();
+    printf("    GetDimensions: %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(dims1, 40.0f, 60.0f), "GetDimensions should return width and height");
+
+    timer.Start();
+    Vector2Class dims2 = constBox.AABB2_GetDimensions();
+    timer.Stop();
+    printf("    GetDimensions (const): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(dims2, 20.0f, 20.0f), "GetDimensions should work on const AABB2 objects");
 
     // Test GetNearestPoint
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetNearestPoint(Vector2Class(30.0f, 50.0f)), 30.0f, 50.0f),
-                     "GetNearestPoint should return same point if inside box");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetNearestPoint(Vector2Class(60.0f, 50.0f)), 50.0f, 50.0f),
-                     "GetNearestPoint should clamp to east edge for point east of box");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetNearestPoint(Vector2Class(5.0f, 50.0f)), 10.0f, 50.0f),
-                     "GetNearestPoint should clamp to west edge for point west of box");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetNearestPoint(Vector2Class(30.0f, 90.0f)), 30.0f, 80.0f),
-                     "GetNearestPoint should clamp to north edge for point north of box");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetNearestPoint(Vector2Class(30.0f, 10.0f)), 30.0f, 20.0f),
-                     "GetNearestPoint should clamp to south edge for point south of box");
-    VerifyTestResult(IsMostlyEqual(constBox.AABB2_GetNearestPoint(Vector2Class(0.0f, 0.0f)), 5.0f, 15.0f),
-                     "GetNearestPoint should work on const AABB2 objects");
+    timer.Start();
+    Vector2Class nearest1 = box.AABB2_GetNearestPoint(Vector2Class(30.0f, 50.0f));
+    timer.Stop();
+    printf("    GetNearestPoint (inside): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(nearest1, 30.0f, 50.0f), "GetNearestPoint should return same point if inside box");
+
+    timer.Start();
+    Vector2Class nearest2 = box.AABB2_GetNearestPoint(Vector2Class(60.0f, 50.0f));
+    timer.Stop();
+    printf("    GetNearestPoint (east): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(nearest2, 50.0f, 50.0f), "GetNearestPoint should clamp to east edge for point east of box");
+
+    timer.Start();
+    Vector2Class nearest3 = box.AABB2_GetNearestPoint(Vector2Class(5.0f, 50.0f));
+    timer.Stop();
+    printf("    GetNearestPoint (west): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(nearest3, 10.0f, 50.0f), "GetNearestPoint should clamp to west edge for point west of box");
+
+    timer.Start();
+    Vector2Class nearest4 = box.AABB2_GetNearestPoint(Vector2Class(30.0f, 90.0f));
+    timer.Stop();
+    printf("    GetNearestPoint (north): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(nearest4, 30.0f, 80.0f), "GetNearestPoint should clamp to north edge for point north of box");
+
+    timer.Start();
+    Vector2Class nearest5 = box.AABB2_GetNearestPoint(Vector2Class(30.0f, 10.0f));
+    timer.Stop();
+    printf("    GetNearestPoint (south): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(nearest5, 30.0f, 20.0f), "GetNearestPoint should clamp to south edge for point south of box");
+
+    timer.Start();
+    Vector2Class nearest6 = constBox.AABB2_GetNearestPoint(Vector2Class(0.0f, 0.0f));
+    timer.Stop();
+    printf("    GetNearestPoint (const): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(nearest6, 5.0f, 15.0f), "GetNearestPoint should work on const AABB2 objects");
 
     // Test GetPointAtUV
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetPointAtUV(Vector2Class(0.0f, 0.0f)), 10.0f, 20.0f),
-                     "GetPointAtUV(0,0) should return mins");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetPointAtUV(Vector2Class(1.0f, 1.0f)), 50.0f, 80.0f),
-                     "GetPointAtUV(1,1) should return maxs");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetPointAtUV(Vector2Class(0.5f, 0.5f)), 30.0f, 50.0f),
-                     "GetPointAtUV(0.5,0.5) should return center");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetPointAtUV(Vector2Class(0.25f, 0.75f)), 20.0f, 65.0f),
-                     "GetPointAtUV should interpolate correctly");
-    VerifyTestResult(IsMostlyEqual(constBox.AABB2_GetPointAtUV(Vector2Class(0.5f, 0.5f)), 15.0f, 25.0f),
-                     "GetPointAtUV should work on const AABB2 objects");
+    timer.Start();
+    Vector2Class pointUV1 = box.AABB2_GetPointAtUV(Vector2Class(0.0f, 0.0f));
+    timer.Stop();
+    printf("    GetPointAtUV (0,0): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(pointUV1, 10.0f, 20.0f), "GetPointAtUV(0,0) should return mins");
+
+    timer.Start();
+    Vector2Class pointUV2 = box.AABB2_GetPointAtUV(Vector2Class(1.0f, 1.0f));
+    timer.Stop();
+    printf("    GetPointAtUV (1,1): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(pointUV2, 50.0f, 80.0f), "GetPointAtUV(1,1) should return maxs");
+
+    timer.Start();
+    Vector2Class pointUV3 = box.AABB2_GetPointAtUV(Vector2Class(0.5f, 0.5f));
+    timer.Stop();
+    printf("    GetPointAtUV (0.5,0.5): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(pointUV3, 30.0f, 50.0f), "GetPointAtUV(0.5,0.5) should return center");
+
+    timer.Start();
+    Vector2Class pointUV4 = box.AABB2_GetPointAtUV(Vector2Class(0.25f, 0.75f));
+    timer.Stop();
+    printf("    GetPointAtUV (interpolate): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(pointUV4, 20.0f, 65.0f), "GetPointAtUV should interpolate correctly");
+
+    timer.Start();
+    Vector2Class pointUV5 = constBox.AABB2_GetPointAtUV(Vector2Class(0.5f, 0.5f));
+    timer.Stop();
+    printf("    GetPointAtUV (const): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(pointUV5, 15.0f, 25.0f), "GetPointAtUV should work on const AABB2 objects");
 
     // Test GetUVForPoint
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetUVForPoint(Vector2Class(10.0f, 20.0f)), 0.0f, 0.0f),
-                     "GetUVForPoint(mins) should return (0,0)");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetUVForPoint(Vector2Class(50.0f, 80.0f)), 1.0f, 1.0f),
-                     "GetUVForPoint(maxs) should return (1,1)");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetUVForPoint(Vector2Class(30.0f, 50.0f)), 0.5f, 0.5f),
-                     "GetUVForPoint(center) should return (0.5,0.5)");
-    VerifyTestResult(IsMostlyEqual(box.AABB2_GetUVForPoint(Vector2Class(20.0f, 65.0f)), 0.25f, 0.75f),
-                     "GetUVForPoint should convert correctly");
-    VerifyTestResult(IsMostlyEqual(constBox.AABB2_GetUVForPoint(Vector2Class(15.0f, 25.0f)), 0.5f, 0.5f),
-                     "GetUVForPoint should work on const AABB2 objects");
+    timer.Start();
+    Vector2Class uv1 = box.AABB2_GetUVForPoint(Vector2Class(10.0f, 20.0f));
+    timer.Stop();
+    printf("    GetUVForPoint (mins): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(uv1, 0.0f, 0.0f), "GetUVForPoint(mins) should return (0,0)");
+
+    timer.Start();
+    Vector2Class uv2 = box.AABB2_GetUVForPoint(Vector2Class(50.0f, 80.0f));
+    timer.Stop();
+    printf("    GetUVForPoint (maxs): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(uv2, 1.0f, 1.0f), "GetUVForPoint(maxs) should return (1,1)");
+
+    timer.Start();
+    Vector2Class uv3 = box.AABB2_GetUVForPoint(Vector2Class(30.0f, 50.0f));
+    timer.Stop();
+    printf("    GetUVForPoint (center): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(uv3, 0.5f, 0.5f), "GetUVForPoint(center) should return (0.5,0.5)");
+
+    timer.Start();
+    Vector2Class uv4 = box.AABB2_GetUVForPoint(Vector2Class(20.0f, 65.0f));
+    timer.Stop();
+    printf("    GetUVForPoint (convert): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(uv4, 0.25f, 0.75f), "GetUVForPoint should convert correctly");
+
+    timer.Start();
+    Vector2Class uv5 = constBox.AABB2_GetUVForPoint(Vector2Class(15.0f, 25.0f));
+    timer.Stop();
+    printf("    GetUVForPoint (const): %.6f us\n", timer.GetElapsedMicroseconds());
+    VerifyTestResult(IsMostlyEqual(uv5, 0.5f, 0.5f), "GetUVForPoint should work on const AABB2 objects");
 
     // Test aspect ratio calculation using GetDimensions
     AABB2Class squareBox(0.0f, 0.0f, 10.0f, 10.0f);
     AABB2Class wideBox(0.0f, 0.0f, 20.0f, 10.0f);
     AABB2Class tallBox(0.0f, 0.0f, 10.0f, 20.0f);
 
+    timer.Start();
     Vector2Class squareDims = squareBox.AABB2_GetDimensions();
+    timer.Stop();
+    printf("    GetDimensions (square): %.6f us\n", timer.GetElapsedMicroseconds());
+
+    timer.Start();
     Vector2Class wideDims = wideBox.AABB2_GetDimensions();
+    timer.Stop();
+    printf("    GetDimensions (wide): %.6f us\n", timer.GetElapsedMicroseconds());
+
+    timer.Start();
     Vector2Class tallDims = tallBox.AABB2_GetDimensions();
+    timer.Stop();
+    printf("    GetDimensions (tall): %.6f us\n", timer.GetElapsedMicroseconds());
 
     VerifyTestResult(IsMostlyEqual(squareDims.x / squareDims.y, 1.0f),
                      "Square box should have aspect ratio of 1.0");
@@ -407,7 +514,7 @@ int TestSet_AABB2_Performance_Comprehensive()
     printf("  Running performance tests with %d iterations...\n", AABB2_PERFORMANCE_TEST_ITERATIONS);
 
     PerformanceTimer timer;
-    AABB2Class            testBox(10.0f, 20.0f, 50.0f, 80.0f);
+    AABB2Class       testBox(10.0f, 20.0f, 50.0f, 80.0f);
 
     // Warmup
     for (int i = 0; i < AABB2_PERFORMANCE_WARMUP_ITERATIONS; ++i)
@@ -524,9 +631,9 @@ int TestSet_AABB2_Performance_Comprehensive()
 //-----------------------------------------------------------------------------------------------
 void RunTests_AABB2()
 {
-    printf("\n====================================================================\n");
-    printf("                    COMPREHENSIVE AABB2 TESTS\n");
-    printf("====================================================================\n");
+    printf("////////////////////////////////////////////////////////////////////////////////////////////////////\n");
+    printf("(UnitTests_AABB2)(Start)\n");
+    printf("////////////////////////////////////////////////////////////////////////////////////////////////////\n");
 
     RunTestSet(true, TestSet_AABB2_Constructors, "AABB2 - Constructors");
     RunTestSet(true, TestSet_AABB2_StaticConstants, "AABB2 - Static Constants");
@@ -536,7 +643,7 @@ void RunTests_AABB2()
     RunTestSet(true, TestSet_AABB2_UnimplementedMethods, "AABB2 - Unimplemented Methods");
     RunTestSet(false, TestSet_AABB2_Performance_Comprehensive, "AABB2 - Performance Tests");
 
-    printf("\n====================================================================\n");
-    printf("                   AABB2 TESTING COMPLETED\n");
-    printf("====================================================================\n");
+    printf("////////////////////////////////////////////////////////////////////////////////////////////////////\n");
+    printf("(UnitTests_AABB2)(End)\n");
+    printf("////////////////////////////////////////////////////////////////////////////////////////////////////\n");
 }
