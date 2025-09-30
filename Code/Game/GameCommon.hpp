@@ -18,21 +18,41 @@ typedef int (TestSetFunctionType)(); // Function signature type for all test fun
 //-----------------------------------------------------------------------------------------------
 // Functions provided by Main.cpp, but globally accessible to all test files
 //
-void RunTestSet(bool isGraded, TestSetFunctionType testSetFunction, char const* testSetName);
-void VerifyTestResult(bool isCorrect, char const* testName);
+void RunTestSet(bool bIsGraded, TestSetFunctionType testSetFunction, char const* testSetName);
+void VerifyTestResult(bool bIsCorrect, char const* testName);
 
 //-----------------------------------------------------------------------------------------------
-// Performance measurement utilities for unit tests
+// YOU MAY CHANGE any of these #includes to match your engine filenames
 //
-#include <chrono>
+#include "Engine/Math/AABB2.hpp"      // #include for your Vec2 struct/class
+#include "Engine/Math/Vec2.hpp"      // #include for your Vec2 struct/class
+#include "Engine/Math/IntVec2.hpp"   // #include for your IntVec2 struct/class
 
-struct PerformanceTimer
-{
-    std::chrono::high_resolution_clock::time_point start;
-    std::chrono::high_resolution_clock::time_point end;
-    
-    void Start();
-    void Stop();
-    double GetElapsedMilliseconds() const;
-    double GetElapsedMicroseconds() const;
-};
+//-----------------------------------------------------------------------------------------------
+// YOU MAY CHANGE the "Your Name" column of these #defines to match your own classes / functions
+//
+//		Test name							Your name
+//		~~~~~~~~~							~~~~~~~~~
+#define Vector2Class						Vec2
+#define IntVec2Class						IntVec2
+#define AABB2Class							AABB2
+#define AABB2_Mins							m_mins		// e.g. "mins" if your AABB2 is used as "myBox.mins"
+#define AABB2_Maxs							m_maxs		// e.g. "maxs" if your AABB2 is used as "myBox.maxs"
+
+#define AABB2_IsPointInside					IsPointInside
+#define AABB2_GetCenter						GetCenter
+#define AABB2_GetDimensions					GetDimensions
+#define AABB2_GetNearestPoint				GetNearestPoint
+#define AABB2_GetPointAtUV					GetPointAtUV
+#define AABB2_GetUVForPoint					GetUVForPoint
+#define AABB2_Translate						Translate
+#define AABB2_SetCenter						SetCenter
+#define AABB2_SetDimensions					SetDimensions
+#define AABB2_StretchToIncludePoint			StretchToIncludePoint
+
+//----------------------------------------------------------------------------------------------------
+bool IsMostlyEqual(float a, float b, float epsilon = 0.001f);
+bool IsMostlyEqual(const Vector2Class& vec2, float x, float y);
+bool IsMostlyEqual(const Vector2Class& vec2a, const Vector2Class& vec2b);
+bool IsMostlyEqual(const AABB2Class& box1, const AABB2Class& box2);
+bool IsMostlyEqual(const AABB2Class& box, float minX, float minY, float maxX, float maxY);

@@ -1,32 +1,19 @@
-//-----------------------------------------------------------------------------------------------
-// Math Unit Tests: Main.cpp (version 4.1) - for SMU Guildhall assignments MP1-A1 through MP1-A7
-//
-#include "Game/UnitTests_AABB2.hpp"	// Comprehensive AABB2 tests
-#include <cstdio>
-#include <cstdlib>
+//----------------------------------------------------------------------------------------------------
+// Main.cpp
+//----------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+#include <algorithm>
+#include <cstdio>
+#include <iostream>
+
+#include "Game/UnitTests_AABB2.hpp"
+
+//----------------------------------------------------------------------------------------------------
 void RunTestSets()
 {
-    // RunTests_MP1A1();
-    // RunTests_MP1A2();
-    // RunTests_MP1A3();
-    // RunTests_MP1A4();
-    // RunTests_MP1A7();
-    // RunTests_MP2A1();
-    // RunTests_MP2A2();
-    // RunTests_Custom(); // Uncomment this line after adding the custom tests file
-    RunTests_AABB2(); // Comprehensive AABB2 tests
+    RunTests_AABB2();
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//		DO NOT MODIFY ANY CODE BELOW HERE WITHOUT EXPRESS PERMISSION FROM YOUR PROFESSOR
-//		(as doing so will be considered cheating and have serious academic consequences)
-//
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////
 
 //-----------------------------------------------------------------------------------------------
 // Global variables for test result tracking
@@ -47,49 +34,52 @@ int g_numNonGradedTestsExpected = 0;
 int g_numNonGradedTestsSkipped  = 0;
 
 //-----------------------------------------------------------------------------------------------
-void VerifyTestResult(bool isCorrect, char const* testName)
+void VerifyTestResult(bool const  bIsCorrect,
+                      char const* testName)
 {
-    if (isCorrect)
+    if (bIsCorrect)
     {
         ++g_numTotalTestsPassed;
     }
     else
     {
         ++g_numTotalTestsFailed;
-        printf("\n  TEST FAILED: %s", testName);
+        printf("TEST FAILED: %s\n", testName);
     }
 }
 
 //-----------------------------------------------------------------------------------------------
-void RunTestSet(bool isGraded, TestSetFunctionType testSetFunction, char const* testSetName)
+void RunTestSet(bool const                bIsGraded,
+                TestSetFunctionType const testSetFunction,
+                char const*               testSetName)
 {
-    char const* gradedText = isGraded ? "graded" : "non-graded";
-    printf("Running %s test set \"%s\"... ", gradedText, testSetName);
+    char const* gradedText = bIsGraded ? "graded" : "non-graded";
+    printf("Running %s test set \"%s\"... \n", gradedText, testSetName);
 
-    int numTestsPassedBefore = g_numTotalTestsPassed;
-    int numTestsFailedBefore = g_numTotalTestsFailed;
+    int const numTestsPassedBefore = g_numTotalTestsPassed;
+    int const numTestsFailedBefore = g_numTotalTestsFailed;
 
     // RUN THE ACTUAL TEST SET; tests modify g_numTotalTestsPassed & Failed directly
-    int numTestsExpected = testSetFunction();
+    int const numTestsExpected = testSetFunction();
 
-    int numTestsJustPassed  = g_numTotalTestsPassed - numTestsPassedBefore;
-    int numTestsJustFailed  = g_numTotalTestsFailed - numTestsFailedBefore;
-    int numTestsJustTried   = numTestsJustPassed + numTestsJustFailed;
-    int numTestsJustSkipped = numTestsExpected - numTestsJustTried;
+    int const numTestsJustPassed  = g_numTotalTestsPassed - numTestsPassedBefore;
+    int const numTestsJustFailed  = g_numTotalTestsFailed - numTestsFailedBefore;
+    int const numTestsJustTried   = numTestsJustPassed + numTestsJustFailed;
+    int       numTestsJustSkipped = numTestsExpected - numTestsJustTried;
 
     // Check for error in test set reporting (expected vs. attempted # of tests, etc.)
-    bool wasError = false;
+    bool bWasError = false;
     if (numTestsJustSkipped < 0)
     {
-        wasError            = true;
+        bWasError           = true;
         numTestsJustSkipped = 0;
     }
     else if (numTestsJustTried > 0 && numTestsJustTried != numTestsExpected)
     {
-        wasError = true;
+        bWasError = true;
     }
 
-    if (wasError)
+    if (bWasError)
     {
         printf("\n\n");
         printf("########################################################################################\n");
@@ -102,7 +92,7 @@ void RunTestSet(bool isGraded, TestSetFunctionType testSetFunction, char const* 
 
     // Update global test stats based on this test set's results
     g_numTotalTestsSkipped += numTestsJustSkipped;
-    if (isGraded)
+    if (bIsGraded)
     {
         g_numGradedTestsExpected += numTestsExpected;
         g_numGradedTestsPassed += numTestsJustPassed;
@@ -138,19 +128,18 @@ void RunTestSet(bool isGraded, TestSetFunctionType testSetFunction, char const* 
 int main(int, char**)
 {
     // Run test sets
-    printf("Running math library unit tests:\n\n");
+    printf("Welcome to EngineUnitTests!\n");
+    printf("This project aims to perform unit tests on Damon Engine's C++ and JavaScript.\n");
+
     RunTestSets();
 
     // Report results
-    int pointsOffPerIncorrectTest = 2;
-    int numGradedIncorrect        = g_numGradedTestsFailed + g_numGradedTestsSkipped;
-    int assignmentGradePenalty    = pointsOffPerIncorrectTest * numGradedIncorrect;
-    int assignmentGrade           = 100 - assignmentGradePenalty;
+    int const pointsOffPerIncorrectTest = 2;
+    int const numGradedIncorrect        = g_numGradedTestsFailed + g_numGradedTestsSkipped;
+    int const assignmentGradePenalty    = pointsOffPerIncorrectTest * numGradedIncorrect;
+    int       assignmentGrade           = 100 - assignmentGradePenalty;
 
-    if (assignmentGrade < 0)
-    {
-        assignmentGrade = 0;
-    }
+    assignmentGrade = std::max(assignmentGrade, 0);
 
     printf("\n");
     printf("========================================================================================\n");
@@ -167,6 +156,7 @@ int main(int, char**)
     printf("========================================================================================\n");
     printf("\n");
 
-    system("pause"); // block and wait for keypress
+    system("pause");    // block and wait for keypress
+
     return 0;
 }
