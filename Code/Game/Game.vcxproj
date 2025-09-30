@@ -186,11 +186,13 @@
   <ItemGroup>
     <ClInclude Include="EngineBuildPreferences.hpp" />
     <ClInclude Include="GameCommon.hpp" />
+    <ClInclude Include="PerformanceTimer.hpp" />
     <ClInclude Include="UnitTests_AABB2.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCommon.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PerformanceTimer.cpp" />
     <ClCompile Include="UnitTests_AABB2.cpp" />
   </ItemGroup>
   <ItemGroup>
