@@ -28,6 +28,18 @@
     <ClInclude Include="UnitTests_InputSystem.hpp">
       <Filter>UnitTest</Filter>
     </ClInclude>
+    <ClInclude Include="UnitTests_Vec3.hpp">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTests_Vec4.hpp">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTests_IntVec2.hpp">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTests_IntVec3.hpp">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -46,6 +58,18 @@
       <Filter>UnitTest</Filter>
     </ClCompile>
     <ClCompile Include="UnitTests_InputSystem.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTests_Vec3.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTests_Vec4.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTests_IntVec2.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTests_IntVec3.cpp">
       <Filter>UnitTest</Filter>
     </ClCompile>
   </ItemGroup>

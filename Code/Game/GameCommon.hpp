@@ -21,14 +21,17 @@ typedef int (TestSetFunctionType)(); // Function signature type for all test fun
 //
 void RunTestSet(bool bIsGraded, TestSetFunctionType* const testSetFunction, char const* testSetName);
 void VerifyTestResult(bool bIsCorrect, char const* testName);
-
 //-----------------------------------------------------------------------------------------------
 // YOU MAY CHANGE any of these #includes to match your engine filenames
 //
 #include "Engine/Math/AABB2.hpp"      // #include for your Vec2 struct/class
 #include "Engine/Math/Vec2.hpp"      // #include for your Vec2 struct/class
+#include "Engine/Math/Vec3.hpp"      // #include for your Vec2 struct/class
+#include "Engine/Math/Vec4.hpp"      // #include for your Vec2 struct/class
 #include "Engine/Math/IntVec2.hpp"   // #include for your IntVec2 struct/class
+#include "Engine/Math/IntVec3.hpp"   // #include for your IntVec3 struct/class
 #include "Engine/Input/InputSystem.hpp"
+
 
 //-----------------------------------------------------------------------------------------------
 // YOU MAY CHANGE the "Your Name" column of these #defines to match your own classes / functions
@@ -36,7 +39,10 @@ void VerifyTestResult(bool bIsCorrect, char const* testName);
 //		Test name							Your name
 //		~~~~~~~~~							~~~~~~~~~
 #define Vector2Class						Vec2
+#define Vector3Class						Vec3
+#define Vector4Class						Vec4
 #define IntVec2Class						IntVec2
+#define IntVec3Class						IntVec3
 #define AABB2Class							AABB2
 #define AABB2_Mins							m_mins		// e.g. "mins" if your AABB2 is used as "myBox.mins"
 #define AABB2_Maxs							m_maxs		// e.g. "maxs" if your AABB2 is used as "myBox.maxs"

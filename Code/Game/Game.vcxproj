@@ -193,7 +193,11 @@
     <ClInclude Include="PerformanceTimer.hpp" />
     <ClInclude Include="UnitTests_AABB2.hpp" />
     <ClInclude Include="UnitTests_InputSystem.hpp" />
+    <ClInclude Include="UnitTests_IntVec2.hpp" />
+    <ClInclude Include="UnitTests_IntVec3.hpp" />
     <ClInclude Include="UnitTests_Vec2.hpp" />
+    <ClInclude Include="UnitTests_Vec3.hpp" />
+    <ClInclude Include="UnitTests_Vec4.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCommon.cpp" />
@@ -201,7 +205,11 @@
     <ClCompile Include="PerformanceTimer.cpp" />
     <ClCompile Include="UnitTests_AABB2.cpp" />
     <ClCompile Include="UnitTests_InputSystem.cpp" />
+    <ClCompile Include="UnitTests_IntVec2.cpp" />
+    <ClCompile Include="UnitTests_IntVec3.cpp" />
     <ClCompile Include="UnitTests_Vec2.cpp" />
+    <ClCompile Include="UnitTests_Vec3.cpp" />
+    <ClCompile Include="UnitTests_Vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Engine\Code\Engine\Engine.vcxproj">
