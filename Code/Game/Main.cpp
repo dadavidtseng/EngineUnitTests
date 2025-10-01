@@ -5,14 +5,18 @@
 //----------------------------------------------------------------------------------------------------
 #include <algorithm>
 #include <cstdio>
-#include <iostream>
 
+#include "Game/GameCommon.hpp"
 #include "Game/UnitTests_AABB2.hpp"
+#include "Game/UnitTests_InputSystem.hpp"
+#include "Game/UnitTests_Vec2.hpp"
 
 //----------------------------------------------------------------------------------------------------
 void RunTestSets()
 {
     RunTests_AABB2();
+    RunTests_Vec2();
+    RunTests_InputSystem();
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -49,10 +53,12 @@ void VerifyTestResult(bool const  bIsCorrect,
 }
 
 //-----------------------------------------------------------------------------------------------
-void RunTestSet(bool const                bIsGraded,
-                TestSetFunctionType const testSetFunction,
-                char const*               testSetName)
+void RunTestSet(bool const                 bIsGraded,
+                TestSetFunctionType* const testSetFunction,
+                char const*                testSetName)
 {
+    printf("\n");
+
     char const* gradedText = bIsGraded ? "graded" : "non-graded";
     printf("Running %s test set \"%s\"... \n", gradedText, testSetName);
 
@@ -129,7 +135,7 @@ int main(int, char**)
 {
     // Run test sets
     printf("Welcome to EngineUnitTests!\n");
-    printf("This project aims to perform unit tests on Damon Engine's C++ and JavaScript.\n");
+    printf("This project aims to perform unit tests on Damon Engine's C++ and JavaScript.\n\n");
 
     RunTestSets();
 

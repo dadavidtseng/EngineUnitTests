@@ -22,6 +22,12 @@
     <ClInclude Include="PerformanceTimer.hpp">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="UnitTests_Vec2.hpp">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTests_InputSystem.hpp">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -35,6 +41,12 @@
     </ClCompile>
     <ClCompile Include="PerformanceTimer.cpp">
       <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTests_Vec2.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTests_InputSystem.cpp">
+      <Filter>UnitTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

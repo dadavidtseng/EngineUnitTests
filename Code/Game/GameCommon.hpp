@@ -2,6 +2,7 @@
 // GameCommon.hpp
 //----------------------------------------------------------------------------------------------------
 #pragma once
+#include "PerformanceTimer.hpp"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -18,7 +19,7 @@ typedef int (TestSetFunctionType)(); // Function signature type for all test fun
 //-----------------------------------------------------------------------------------------------
 // Functions provided by Main.cpp, but globally accessible to all test files
 //
-void RunTestSet(bool bIsGraded, TestSetFunctionType testSetFunction, char const* testSetName);
+void RunTestSet(bool bIsGraded, TestSetFunctionType* const testSetFunction, char const* testSetName);
 void VerifyTestResult(bool bIsCorrect, char const* testName);
 
 //-----------------------------------------------------------------------------------------------
@@ -27,6 +28,7 @@ void VerifyTestResult(bool bIsCorrect, char const* testName);
 #include "Engine/Math/AABB2.hpp"      // #include for your Vec2 struct/class
 #include "Engine/Math/Vec2.hpp"      // #include for your Vec2 struct/class
 #include "Engine/Math/IntVec2.hpp"   // #include for your IntVec2 struct/class
+#include "Engine/Input/InputSystem.hpp"
 
 //-----------------------------------------------------------------------------------------------
 // YOU MAY CHANGE the "Your Name" column of these #defines to match your own classes / functions
@@ -50,9 +52,37 @@ void VerifyTestResult(bool bIsCorrect, char const* testName);
 #define AABB2_SetDimensions					SetDimensions
 #define AABB2_StretchToIncludePoint			StretchToIncludePoint
 
+#define InputSystemClass                    InputSystem
+#define InputSystemConfig                   sInputSystemConfig
+#define XboxControllerClass                 XboxController
+#define sKeyButtonStateClass                sKeyButtonState
+#define AnalogJoystickClass                 AnalogJoystick
+#define EventArgsClass                 EventArgs
+
 //----------------------------------------------------------------------------------------------------
 bool IsMostlyEqual(float a, float b, float epsilon = 0.001f);
 bool IsMostlyEqual(const Vector2Class& vec2, float x, float y);
 bool IsMostlyEqual(const Vector2Class& vec2a, const Vector2Class& vec2b);
 bool IsMostlyEqual(const AABB2Class& box1, const AABB2Class& box2);
 bool IsMostlyEqual(const AABB2Class& box, float minX, float minY, float maxX, float maxY);
+
+template <typename Func>
+decltype(auto) TimeFunction(char const* description, Func&& func)
+{
+    PerformanceTimer timer;
+    timer.Start();
+    decltype(auto) result = std::forward<Func>(func)();
+    timer.Stop();
+    printf("    %s: %.6f us\n", description, timer.GetElapsedMicroseconds());
+    return result;
+}
+
+template <typename Func>
+void TimeAction(char const* description, Func&& func)
+{
+    PerformanceTimer timer;
+    timer.Start();
+    std::forward<Func>(func)();
+    timer.Stop();
+    printf("    %s: %.6f us\n", description, timer.GetElapsedMicroseconds());
+}
