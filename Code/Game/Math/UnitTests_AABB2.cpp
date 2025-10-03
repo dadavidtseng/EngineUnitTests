@@ -3,7 +3,7 @@
 //----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
-#include "Game/UnitTests_AABB2.hpp"
+#include "Game/Math/UnitTests_AABB2.hpp"
 #include <cstdio>
 #include "Game/GameCommon.hpp"
 #include "Game/PerformanceTimer.hpp"
