@@ -190,26 +190,26 @@
   <ItemGroup>
     <ClInclude Include="EngineBuildPreferences.hpp" />
     <ClInclude Include="GameCommon.hpp" />
+    <ClInclude Include="Input\UnitTests_InputSystem.hpp" />
+    <ClInclude Include="Math\UnitTests_AABB2.hpp" />
+    <ClInclude Include="Math\UnitTests_IntVec2.hpp" />
+    <ClInclude Include="Math\UnitTests_IntVec3.hpp" />
+    <ClInclude Include="Math\UnitTests_Vec2.hpp" />
+    <ClInclude Include="Math\UnitTests_Vec3.hpp" />
+    <ClInclude Include="Math\UnitTests_Vec4.hpp" />
     <ClInclude Include="PerformanceTimer.hpp" />
-    <ClInclude Include="UnitTests_AABB2.hpp" />
-    <ClInclude Include="UnitTests_InputSystem.hpp" />
-    <ClInclude Include="UnitTests_IntVec2.hpp" />
-    <ClInclude Include="UnitTests_IntVec3.hpp" />
-    <ClInclude Include="UnitTests_Vec2.hpp" />
-    <ClInclude Include="UnitTests_Vec3.hpp" />
-    <ClInclude Include="UnitTests_Vec4.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCommon.cpp" />
+    <ClCompile Include="Input\UnitTests_InputSystem.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Math\UnitTests_AABB2.cpp" />
+    <ClCompile Include="Math\UnitTests_IntVec2.cpp" />
+    <ClCompile Include="Math\UnitTests_IntVec3.cpp" />
+    <ClCompile Include="Math\UnitTests_Vec2.cpp" />
+    <ClCompile Include="Math\UnitTests_Vec3.cpp" />
+    <ClCompile Include="Math\UnitTests_Vec4.cpp" />
     <ClCompile Include="PerformanceTimer.cpp" />
-    <ClCompile Include="UnitTests_AABB2.cpp" />
-    <ClCompile Include="UnitTests_InputSystem.cpp" />
-    <ClCompile Include="UnitTests_IntVec2.cpp" />
-    <ClCompile Include="UnitTests_IntVec3.cpp" />
-    <ClCompile Include="UnitTests_Vec2.cpp" />
-    <ClCompile Include="UnitTests_Vec3.cpp" />
-    <ClCompile Include="UnitTests_Vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Engine\Code\Engine\Engine.vcxproj">
