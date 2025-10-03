@@ -3,13 +3,10 @@
 //----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
-#include <algorithm>
-#include <cstdio>
-
 #include "Game/GameCommon.hpp"
-#include "Game/UnitTests_AABB2.hpp"
-#include "Game/UnitTests_InputSystem.hpp"
-#include "Game/UnitTests_Vec2.hpp"
+#include "Game/Input/UnitTests_InputSystem.hpp"
+#include "Game/Math/UnitTests_AABB2.hpp"
+#include "Game/Math/UnitTests_Vec2.hpp"
 
 //----------------------------------------------------------------------------------------------------
 void RunTestSets()
